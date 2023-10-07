@@ -2,28 +2,62 @@
 
 public class Robot
 {
-    public bool HasBeenPlaced { get; set; } // updated by board who knows the dimensions
-    public Position Position { get; set; } // private set?
+    public bool IsPlaced { get; private set; }
+    public Position Position { get; private set; }
 
     public Robot()
     {
-        HasBeenPlaced = false;
+        IsPlaced = false;
     }
 
+    // Put the robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST
     public void Place(int x, int y, Direction direction)
     {
         Position = new()
         {
             X = x,
             Y = y,
-            Facing = direction
+            // Facing = direction
         };
+
+        IsPlaced = true;
     }
 
+    public void Place(Position position)
+    {
+        Position = position;
+        IsPlaced = true;
+    }
+
+    // Move the robot one unit forward in the direction it is currently facing
+    public void Move()
+    {
+
+
+    }
+
+    // Rotate the robot 90 degrees left
+    public void RotateLeft()
+    {
+        Position.RotateLeft();
+    }
+
+    // Rotate the robot 90 degrees right
+    public void RotateRight()
+    {
+
+    }
+
+    // Announce the X,Y and F of the robot. This can be in any form, but standard output is sufficient
     public string GetReportString()
     {
-        // Announce the X,Y and F of the robot. This can be in any form, but standard output is sufficient
-        // Check cast of Direction...
-        return $"The robot is placed at {Position.X},{Position.Y} and facing {Position.Facing}.";
+        if (IsPlaced)
+        {
+            return $"The robot is placed at {Position.X},{Position.Y} and facing {Position.Facing}.";
+        }
+        else
+        {
+            return null;
+        }
     }
 }
