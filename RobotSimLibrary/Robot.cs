@@ -8,6 +8,7 @@ public class Robot
     public Robot()
     {
         IsPlaced = false;
+        Position = new();
     }
 
     // Put the robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST
@@ -32,8 +33,21 @@ public class Robot
     // Move the robot one unit forward in the direction it is currently facing
     public void Move()
     {
-
-
+        switch (Position.Facing)
+        {
+            case Direction.North:
+                Position.Y++;
+                break;
+            case Direction.East:
+                Position.X++;
+                break;
+            case Direction.South:
+                Position.Y--;
+                break;
+            case Direction.West:
+                Position.X--;
+                break;
+        }
     }
 
     // Rotate the robot 90 degrees left
@@ -45,7 +59,7 @@ public class Robot
     // Rotate the robot 90 degrees right
     public void RotateRight()
     {
-
+        Position.RotateRight();
     }
 
     // Announce the X,Y and F of the robot. This can be in any form, but standard output is sufficient
