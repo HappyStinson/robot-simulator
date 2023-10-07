@@ -26,26 +26,20 @@ public class RobotTests
     //     Assert.True(robot.IsPlaced);
     // }
 
-    // [Theory]
-    // [InlineData({ X = 0, Y = 0,   })]
-    // public void Place_RobotShouldBePlaced(Position position)
-    // {
-    //     // Arrange
-    //     Robot robot = new();
-    //     Position expected = new()
-    //     {
-    //         X = x,
-    //         Y = y,
-    //         Facing = facing
-    //     };
+    [Fact]
+    public void Place_RobotShouldBePlaced()
+    {
+        // Arrange
+        Robot robot = new();
+        Position expected = new() { X = 3, Y = 2, Facing = Direction.South };
 
-    //     // Act
-    //     robot.Place(x, y, facing);
+        // Act
+        robot.Place(expected);
 
-    //     // Assert
-    //     Assert.Equal(expected, robot.Position);
-    //     Assert.True(robot.IsPlaced);
-    // }
+        // Assert
+        Assert.Equal(expected, robot.Position);
+        Assert.True(robot.IsPlaced);
+    }
 
     [Theory]
     [InlineData(Direction.North, Direction.West)]
@@ -66,7 +60,7 @@ public class RobotTests
         var actual = robot.Position.Facing;
 
         // Assert
-        Assert.Equal(expected, actual);        
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -90,12 +84,11 @@ public class RobotTests
     {
         // Arrange
         Robot robot = new();
-        string expected = null;
 
         // Act
         string actual = robot.GetReportString();
 
         // Assert
-        Assert.Equal(expected, actual);
+        Assert.Null(actual);
     }
 }
