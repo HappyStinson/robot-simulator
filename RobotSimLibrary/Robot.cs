@@ -2,15 +2,28 @@
 
 public class Robot
 {
-    public string Text { get; set; }
+    public bool HasBeenPlaced { get; set; } // updated by board who knows the dimensions
+    public Position Position { get; set; } // private set?
 
     public Robot()
     {
-        Text = "Robot";
+        HasBeenPlaced = false;
+    }
+
+    public void Place(int x, int y, Direction direction)
+    {
+        Position = new()
+        {
+            X = x,
+            Y = y,
+            Facing = direction
+        };
     }
 
     public string GetReportString()
     {
-        return "Hello " + Text;
+        // Announce the X,Y and F of the robot. This can be in any form, but standard output is sufficient
+        // Check cast of Direction...
+        return $"The robot is placed at {Position.X},{Position.Y} and facing {Position.Facing}.";
     }
 }
