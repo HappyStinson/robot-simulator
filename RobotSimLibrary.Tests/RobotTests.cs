@@ -43,14 +43,16 @@ public class RobotTests
 
     [Theory]
     [InlineData(0, 0, 0, 1, Direction.North)]
-    [InlineData(0, 3, 0, 1, Direction.North)]
+    [InlineData(1, 1, 1, 0, Direction.East)]
+    [InlineData(2, 3, 0, -1, Direction.South)]
+    [InlineData(3, 3, -1, 0, Direction.West)]
     public void Move_ShouldUpdatePosition(int x, int y, int addX, int addY, Direction facing)
     {
         // Arrange
         Robot robot = new();
         Position start = new() { X = x, Y = y, Facing = facing};
         robot.Place(start);
-        
+
         var expected = (robot.Position.X + addX, robot.Position.Y + addY);
 
         // Act
