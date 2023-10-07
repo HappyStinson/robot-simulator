@@ -17,15 +17,21 @@ public class Position
 
     public void RotateLeft()
     {
-        var newDir = Facing - 1;
+        var newDir = --Facing;
 
         if (newDir < 0)
         {
             Facing = (Direction)_directionCount - 1;
         }
-        else
+    }
+
+    public void RotateRight()
+    {
+        var newDir = ++Facing;
+
+        if ((int)newDir == _directionCount)
         {
-            Facing--;
+            Facing = 0;
         }
     }
 }

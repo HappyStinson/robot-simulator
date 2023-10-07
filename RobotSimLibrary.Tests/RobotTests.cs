@@ -42,6 +42,26 @@ public class RobotTests
     }
 
     [Theory]
+    [InlineData(0, 0, 0, 1, Direction.North)]
+    [InlineData(0, 3, 0, 1, Direction.North)]
+    public void Move_ShouldUpdatePosition(int x, int y, int addX, int addY, Direction facing)
+    {
+        // Arrange
+        Robot robot = new();
+        Position start = new() { X = x, Y = y, Facing = facing};
+        robot.Place(start);
+        
+        var expected = (robot.Position.X + addX, robot.Position.Y + addY);
+
+        // Act
+        robot.Move();
+
+        // Assert
+        var actual = (robot.Position.X, robot.Position.Y);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
     [InlineData(Direction.North, Direction.West)]
     [InlineData(Direction.East, Direction.North)]
     [InlineData(Direction.South, Direction.East)]
@@ -57,6 +77,28 @@ public class RobotTests
 
         // Act
         robot.RotateLeft();
+        var actual = robot.Position.Facing;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(Direction.North, Direction.East)]
+    [InlineData(Direction.East, Direction.South)]
+    [InlineData(Direction.South, Direction.West)]
+    [InlineData(Direction.West, Direction.North)]
+    public void RotateRight_ShouldUpdateDirection(Direction before, Direction after)
+    {
+        // Arrange
+        Direction expected = after;
+
+        Robot robot = new();
+        Position pos = new() { X = 0, Y = 0, Facing = before };
+        robot.Place(pos);
+
+        // Act
+        robot.RotateRight();
         var actual = robot.Position.Facing;
 
         // Assert
