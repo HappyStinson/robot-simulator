@@ -1,6 +1,3 @@
-using System.Text;
-using RobotSimLibrary;
-
 namespace RobotSimLibrary.Tests;
 
 public class RobotTests
@@ -133,6 +130,6 @@ public class RobotTests
         string actual = robot.GetReportString();
 
         // Assert
-        Assert.Null(actual);
+        Assert.True(actual == "");
     }
 }

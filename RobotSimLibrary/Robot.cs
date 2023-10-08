@@ -71,7 +71,7 @@ public class Robot
         }
         else
         {
-            return null;
+            return "";
         }
     }
 }
