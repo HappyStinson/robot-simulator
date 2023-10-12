@@ -2,27 +2,6 @@ namespace RobotSimLibrary.Tests;
 
 public class RobotTests
 {
-    // [Theory]
-    // [InlineData(0, 0, Direction.North)]
-    // public void Place_RobotShouldBePlaced(int x, int y, Direction facing)
-    // {
-    //     // Arrange
-    //     Robot robot = new();
-    //     Position expected = new()
-    //     {
-    //         X = x,
-    //         Y = y,
-    //         Facing = facing
-    //     };
-
-    //     // Act
-    //     robot.Place(x, y, facing);
-
-    //     // Assert
-    //     Assert.Equal(expected, robot.Position);
-    //     Assert.True(robot.IsPlaced);
-    // }
-
     [Fact]
     public void Place_RobotShouldBePlaced()
     {
@@ -49,11 +28,34 @@ public class RobotTests
         Robot robot = new();
         Position start = new() { X = x, Y = y, Facing = facing};
         robot.Place(start);
+        var tableBoundary = 4;
 
         var expected = (robot.Position?.X + addX, robot.Position?.Y + addY);
 
         // Act
-        robot.Move();
+        robot.Move(tableBoundary, tableBoundary);
+
+        // Assert
+        var actual = (robot.Position?.X, robot.Position?.Y);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(0, 4, Direction.North)]
+    [InlineData(4, 1, Direction.East)]
+    [InlineData(2, 0, Direction.South)]
+    [InlineData(0, 3, Direction.West)]
+    public void Move_InvalidPositionShouldBeIgnored(int x, int y, Direction facing)
+    {
+        // Arrange
+        Robot robot = new();
+        Position start = new() { X = x, Y = y, Facing = facing};
+        var expected = (x, y);
+        robot.Place(start);
+        var tableBoundary = 4;
+
+        // Act
+        robot.Move(tableBoundary, tableBoundary);
 
         // Assert
         var actual = (robot.Position?.X, robot.Position?.Y);

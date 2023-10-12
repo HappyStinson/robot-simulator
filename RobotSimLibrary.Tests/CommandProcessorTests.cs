@@ -1,6 +1,6 @@
 namespace RobotSimLibrary.Tests;
 
-public class RobotInstructionsTests
+public class CommandProcessorTests
 {
     [Fact]
     public void ReadCommandsFromFile_ShouldOpenFile()
@@ -20,6 +20,16 @@ public class RobotInstructionsTests
 
         // Assert
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ReadCommandsFromFile_InvalidNameShouldFail()
+    {
+        // Arrange
+        CommandProcessor processor = new();
+
+        // Assert
+        Assert.Throws<FileNotFoundException>(() => CommandProcessor.ReadCommandsFromFile(""));
     }
 
     // [Fact]
