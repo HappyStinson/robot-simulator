@@ -3,12 +3,11 @@
 public class Robot
 {
     public bool IsPlaced { get; private set; }
-    public Position Position { get; private set; }
+    public Position? Position { get; private set; }
 
     public Robot()
     {
         IsPlaced = false;
-        Position = new();
     }
 
     // Put the robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST
@@ -33,7 +32,7 @@ public class Robot
     // Move the robot one unit forward in the direction it is currently facing
     public void Move()
     {
-        switch (Position.Facing)
+        switch (Position?.Facing)
         {
             case Direction.North:
                 Position.Y++;
@@ -53,25 +52,18 @@ public class Robot
     // Rotate the robot 90 degrees left
     public void RotateLeft()
     {
-        Position.RotateLeft();
+        Position?.RotateLeft();
     }
 
     // Rotate the robot 90 degrees right
     public void RotateRight()
     {
-        Position.RotateRight();
+        Position?.RotateRight();
     }
 
     // Announce the X,Y and F of the robot. This can be in any form, but standard output is sufficient
-    public string GetReportString()
+    public string? GetPositionString()
     {
-        if (IsPlaced)
-        {
-            return $"The robot is placed at {Position.X},{Position.Y} and facing {Position.Facing}.";
-        }
-        else
-        {
-            return "";
-        }
+        return Position?.GetPositionString();
     }
 }

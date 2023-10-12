@@ -50,13 +50,13 @@ public class RobotTests
         Position start = new() { X = x, Y = y, Facing = facing};
         robot.Place(start);
 
-        var expected = (robot.Position.X + addX, robot.Position.Y + addY);
+        var expected = (robot.Position?.X + addX, robot.Position?.Y + addY);
 
         // Act
         robot.Move();
 
         // Assert
-        var actual = (robot.Position.X, robot.Position.Y);
+        var actual = (robot.Position?.X, robot.Position?.Y);
         Assert.Equal(expected, actual);
     }
 
@@ -76,7 +76,7 @@ public class RobotTests
 
         // Act
         robot.RotateLeft();
-        var actual = robot.Position.Facing;
+        var actual = robot.Position?.Facing;
 
         // Assert
         Assert.Equal(expected, actual);
@@ -98,38 +98,38 @@ public class RobotTests
 
         // Act
         robot.RotateRight();
-        var actual = robot.Position.Facing;
+        var actual = robot.Position?.Facing;
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
     [Fact]
-    public void GetReportString_PlacedRobotPositionShouldBeReported()
+    public void GetPositionString_PlacedRobotPositionShouldBeReported()
     {
         // Arrange
         Robot robot = new();
         Position pos = new() { X = 1, Y = 2, Facing = Direction.West };
         robot.Place(pos);
-        string expected = "The robot is placed at 1,2 and facing West.";
+        string expected = "1,2,WEST";
 
         // Act
-        string actual = robot.GetReportString();
+        string? actual = robot.GetPositionString();
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
     [Fact]
-    public void GetReportString_NotPlacedRobotShouldNotBeReported()
+    public void GetPositionString_NotPlacedRobotShouldNotBeReported()
     {
         // Arrange
         Robot robot = new();
 
         // Act
-        string actual = robot.GetReportString();
+        string? actual = robot.GetPositionString();
 
         // Assert
-        Assert.True(actual == "");
+        Assert.Null(actual);
     }
 }
