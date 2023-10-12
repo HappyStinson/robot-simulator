@@ -3,63 +3,75 @@ namespace RobotSimLibrary.Tests;
 public class RobotInstructionsTests
 {
     [Fact]
-    public void ReadInstructionsFromFile_ShouldOpenFile()
+    public void ReadCommandsFromFile_ShouldOpenFile()
     {
         // Arrange
-        RobotInstructions instructions = new();
+        CommandProcessor instructions = new();
         string? root = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName;
 
 
         var assetsFolder = Path.Combine(root, "Assets");
-        var file = Path.Combine(assetsFolder, "RobotInstructions.txt");        
+        var file = Path.Combine(assetsFolder, "PlaceTest.txt");
+
+        string[] expected = { "PLACE 0,0,NORTH" };
 
         // Act
-        instructions.ReadInstructionsFromFile(file);
+        var actual = CommandProcessor.ReadCommandsFromFile(file);
 
         // Assert
-        Assert.NotNull(instructions.Instructions);
+        Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void ProcessInstructions_ShouldRaiseEvent()
-    {
-        RobotInstructions instructions = new()
-        {
-            Instructions = "PLACE,0,0"
-        };
+    // [Fact]
+    // public void ProcessCommands_ShouldRaiseEvent()
+    // {
+    //     RobotInstructions instructions = new()
+    //     {
+    //         // Instructions = "PLACE,0,0"
+    //     };
 
-        instructions.Instructions = "place";
-        Subscriber sub = new(instructions);
+    //     // instructions.Instructions = "place";
+    //     Subscriber sub = new(instructions);
 
-        // Call the method that raises the event.
-        instructions.ProcessInstructions();
+    //     // This is the file path
+    //     string? root = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName;
+    //     var assetsFolder = Path.Combine(root, "Assets");
+    //     var filePath = Path.Combine(assetsFolder, "RobotInstructions.txt");
 
-        // Assert
-        // how to assert , check the robot isPlaced?
+    //     // Call the method that raises the event.
+    //     instructions.ProcessCommands(filePath);
 
-        // Keep the console window open
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadLine();
-    }
+    //     // Assert
+    //     // how to assert , check the robot isPlaced?
 
-    [Fact]
-    public void ProcessInstructions_ShouldRaiseSimpleEvent()
-    {
-        RobotInstructions instructions = new()
-        {
-            Instructions = "move"
-        };
+    //     // Keep the console window open
+    //     Console.WriteLine("Press any key to continue...");
+    //     Console.ReadLine();
+    // }
 
-        Subscriber sub = new(instructions);
+    // [Fact]
+    // public void ProcessCommands_ShouldRaiseSimpleEvent()
+    // {
+    //     RobotInstructions instructions = new()
+    //     {
+    //         // Instructions = "move"
+    //     };
 
-        // Call the method that raises the event.
-        instructions.ProcessInstructions();
+    //     Subscriber sub = new(instructions);
 
-        // Assert
-        // how to assert , check the robot isPlaced?
+    //     // This is the file path
+    //     string? root = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName;
+    //     var assetsFolder = Path.Combine(root, "Assets");
+    //     var filePath = Path.Combine(assetsFolder, "RobotInstructions.txt");
 
-        // Keep the console window open
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadLine();
-    }
+    //     // Call the method that raises the event.
+    //     instructions.ProcessCommands(filePath);
+
+    //     // Assert
+    //     // how to assert , check the robot isPlaced?
+
+    //     // Keep the console window open
+    //     Console.WriteLine("Press any key to continue...");
+    //     Console.ReadLine();
+    // }
 }

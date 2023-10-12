@@ -15,6 +15,8 @@ public class Position
     public Direction Facing { get; set; }
     private const int _directionCount = 4;
 
+    
+
     public void RotateLeft()
     {
         var newDir = --Facing;
@@ -33,5 +35,10 @@ public class Position
         {
             Facing = 0;
         }
+    }
+
+    public string GetPositionString()
+    {
+        return $"{X},{Y},{Facing.ToString().ToUpper()}";
     }
 }
