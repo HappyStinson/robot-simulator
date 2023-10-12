@@ -29,12 +29,10 @@ public class CommandProcessor
             switch (ParseCommand(args[0]))
             {
                 case Command.Place:
-                    Console.WriteLine("Placing the Robot");
                     var position = args[1].Split(',');
                     OnRaisePlaceEvent(new PlaceEventArgs(GetPosition(position)));
                 break;
                 case Command.Move:
-                    Console.WriteLine($"Move your body!");
                     OnRaiseMoveEvent(EventArgs.Empty);
                 break;
                 case Command.Left:
@@ -46,12 +44,7 @@ public class CommandProcessor
                 case Command.Report:
                     OnRaiseReportEvent(EventArgs.Empty);
                 break;
-
-                default:
-                break;
             }
-
-            Console.WriteLine($"Command: {command}");
         }
     }
 
@@ -64,17 +57,6 @@ public class CommandProcessor
         }
 
         return File.ReadAllLines(filePath);
-
-        // Open the file to read from.
-        // using (StreamReader sr = File.OpenText(path))
-        // {
-        //     string? s;
-        //     while ((s = sr.ReadLine()) != null)
-        //     {
-        //         Instructions = s;
-        //         Console.WriteLine(s);
-        //     }
-        // }
     }
 
     // Wrap event invocations inside a protected virtual method

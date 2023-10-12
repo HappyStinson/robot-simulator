@@ -11,18 +11,6 @@ public class Robot
     }
 
     // Put the robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST
-    public void Place(int x, int y, Direction direction)
-    {
-        Position = new()
-        {
-            X = x,
-            Y = y,
-            // Facing = direction
-        };
-
-        IsPlaced = true;
-    }
-
     public void Place(Position position)
     {
         Position = position;
@@ -30,21 +18,33 @@ public class Robot
     }
 
     // Move the robot one unit forward in the direction it is currently facing
-    public void Move()
+    public void Move(int width, int height)
     {
         switch (Position?.Facing)
         {
             case Direction.North:
-                Position.Y++;
+                if (Position.Y + 1 <= height)
+                {
+                    Position.Y++;
+                }
                 break;
             case Direction.East:
-                Position.X++;
+                if (Position.X + 1 <= width)
+                {
+                    Position.X++;
+                }
                 break;
             case Direction.South:
-                Position.Y--;
+                if (Position.Y - 1 > -1)
+                {
+                    Position.Y--;
+                }
                 break;
             case Direction.West:
-                Position.X--;
+                if (Position.X - 1 > -1)
+                {
+                    Position.X--;
+                }
                 break;
         }
     }
