@@ -46,6 +46,11 @@ public class CommandProcessor
                 break;
             }
         }
+
+        if (commands.Length > 0)
+        {
+            Console.WriteLine("Parsed all commandz");
+        }
     }
 
     public static string[] ReadCommandsFromFile(string filePath) // public for unit test
