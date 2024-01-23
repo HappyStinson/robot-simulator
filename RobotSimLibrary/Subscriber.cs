@@ -1,11 +1,11 @@
 namespace RobotSimLibrary;
 
-public class RobotCommandHandler
+public class Subscriber
 {
     public Robot? Robot { get; set; }
     public readonly (int Width, int Height) TableDimensions = (5, 5);
 
-    public RobotCommandHandler(CommandProcessor commands)
+    public Subscriber(CommandProcessor commands)
     {
         // Subscribe to the command events
         commands.RaisePlaceEvent += HandlePlaceEvent;
@@ -22,7 +22,7 @@ public class RobotCommandHandler
             PlaceRobot(e.Position);
         }
     }
-
+    
     private bool IsValidPosition(Position pos)
     {
         // Check if the placement is valid and within the table boundaries.

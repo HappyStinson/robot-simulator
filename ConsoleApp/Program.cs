@@ -1,6 +1,9 @@
 ﻿using RobotSimLibrary;
 
-string? root = Directory.GetParent(Directory.GetCurrentDirectory())?.FullName;
+string? root = Directory.Exists("Assets") ?
+    Directory.GetCurrentDirectory() :
+    Directory.GetParent(Directory.GetCurrentDirectory())?.FullName;
+
 var assetsFolder = Path.Combine(root, "Assets");
 var filePath = Path.Combine(assetsFolder, "RobotInstructions.txt");
 

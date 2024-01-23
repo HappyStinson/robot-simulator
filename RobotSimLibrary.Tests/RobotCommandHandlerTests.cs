@@ -7,7 +7,7 @@ public class RobotCommandHandlerTests
     {
         // Arrange
         CommandProcessor processor = new();
-        RobotCommandHandler handler = new(processor);
+        Subscriber handler = new(processor);
         Position expected = new()
         {
             X = 1,
@@ -28,7 +28,7 @@ public class RobotCommandHandlerTests
     {
         // Arrange
         CommandProcessor processor = new();
-        RobotCommandHandler handler = new(processor);
+        Subscriber handler = new(processor);
         Position invalid = new()
         {
             X = handler.TableDimensions.Width + 1,
@@ -48,7 +48,7 @@ public class RobotCommandHandlerTests
     {
         // Arrange
         CommandProcessor processor = new();
-        RobotCommandHandler handler = new(processor);
+        Subscriber handler = new(processor);
         Position start = new() { X = 1, Y = 2, Facing = Direction.North };
         var expected = start.Y + 1;
 
